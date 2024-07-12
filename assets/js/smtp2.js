@@ -12,7 +12,7 @@ function sendemail() {
         Host: "smtp.elasticemail.com",
         Username: "nondonpursr@gmail.com",
         Password: "91258B3D9D445F282B43EF15DB4573BA9240",
-        To: 'Lakshsr786@gmail.com',
+        To: 'Lakshnp786@gmail.com',
         From: "nondonpursr@gmail.com",
         Subject: subject,
         Body: body
