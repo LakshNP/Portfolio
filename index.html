@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infiniloop — Adobe Stock Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F7FB;--surface:#fff;--text:#0B1220;--muted:#56627A;--line:#DDE3EE;--acc:#2B50FF;--acc2:#0FA98E;--chip:#E9EEFA;--on:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1220;--surface:#121B2E;--text:#EEF2FF;--muted:#9AA7C2;--line:#22304D;--acc:#7B93FF;--acc2:#2FD3B3;--chip:#18233B;--on:#0B1220}}
+:root[data-theme="dark"]{--bg:#0B1220;--surface:#121B2E;--text:#EEF2FF;--muted:#9AA7C2;--line:#22304D;--acc:#7B93FF;--acc2:#2FD3B3;--chip:#18233B;--on:#0B1220}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Sora,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-weight:600;font-size:1.5rem;letter-spacing:-.02em}
+.logo .a{color:var(--acc)}.logo .b{color:var(--acc2)}
+.btn{display:inline-block;background:var(--acc);color:var(--on);text-decoration:none;font-weight:600;font-size:.9rem;padding:11px 20px;border-radius:999px}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible,.card:focus-visible,.chip:focus-visible,input:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.hero{padding:56px 0 28px}
+.hero h1{font-size:clamp(2rem,5.5vw,3.5rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;max-width:15em}
+.hero p{color:var(--muted);max-width:36em;margin:0 0 26px;font-size:1.05rem}
+.stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:34px}
+.stats b{display:block;font-size:1.6rem;letter-spacing:-.02em}
+.stats span{color:var(--muted);font-size:.85rem}
+.tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:30px 0 22px}
+input[type=search]{flex:1 1 240px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:12px 18px;font:inherit;font-size:.92rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--chip);color:var(--text);border:1px solid transparent;border-radius:999px;padding:9px 16px;font:inherit;font-size:.85rem;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--acc);color:var(--on)}
+.count{color:var(--muted);font-size:.85rem;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;padding-bottom:40px}
+.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(10,20,50,.18)}
+.poster{position:relative;aspect-ratio:16/9;overflow:hidden;background:linear-gradient(145deg,hsl(var(--h) 55% 20%),hsl(calc(var(--h) + 35) 60% 9%))}
+.bill{position:absolute;left:var(--x);top:var(--y);width:44%;aspect-ratio:2.2/1;border-radius:5px;background:linear-gradient(135deg,#55BD84,#1F6F4A);border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:700;font-size:1.2rem;animation:bob 4s ease-in-out infinite alternate;animation-delay:var(--d)}
+.bill::before{content:"$"}
+.fall .bill{top:-30%;animation:fall 5s linear infinite;animation-delay:var(--d)}
+@keyframes bob{from{transform:translateY(-9px) rotate(var(--r))}to{transform:translateY(9px) rotate(calc(var(--r) * -1))}}
+@keyframes fall{from{transform:translateY(0) rotate(var(--r))}to{transform:translateY(480%) rotate(calc(var(--r) * -1))}}
+.badges{position:absolute;left:10px;bottom:10px;display:flex;gap:6px}
+.badge{background:rgba(8,14,28,.78);color:#fff;font-size:.72rem;padding:3px 9px;border-radius:999px}
+.info{padding:16px 18px 18px}
+.info h3{font-size:.95rem;font-weight:600;line-height:1.35;margin:0 0 10px;letter-spacing:-.01em}
+.info span{color:var(--acc);font-size:.84rem;font-weight:600}
+.empty{color:var(--muted);padding:30px 0}
+footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--acc)}
+@media (prefers-reduced-motion:reduce){.bill{animation:none}.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">infinil<span class="a">o</span><span class="b">o</span>p</div>
+    <a class="btn" href="https://stock.adobe.com/contributor/213646064/Infiniloop" target="_blank" rel="noopener noreferrer">Adobe Stock profile</a>
+  </header>
+
+  <section class="hero">
+    <h1>Seamless loop animations for finance and business.</h1>
+    <p>A curated selection of my HD stock footage. Every clip links straight to its Adobe Stock page, where it can be previewed and licensed.</p>
+    <a class="btn" href="https://stock.adobe.com/contributor/213646064/Infiniloop" target="_blank" rel="noopener noreferrer">Browse the full portfolio ↗</a>
+    <div class="stats">
+      <div><b id="nClips">15</b><span>HD video clips</span></div>
+      <div><b>12–20s</b><span>loop length</span></div>
+      <div><b>100%</b><span>seamless loops</span></div>
+    </div>
+  </section>
+
+  <div class="tools">
+    <input type="search" id="q" placeholder="Search clips, e.g. forex, alpha, falling" aria-label="Search clips">
+    <div class="chips" role="group" aria-label="Filter by length">
+      <button class="chip" data-s="0" aria-pressed="true">All</button>
+      <button class="chip" data-s="12" aria-pressed="false">12s</button>
+      <button class="chip" data-s="15" aria-pressed="false">15s</button>
+      <button class="chip" data-s="20" aria-pressed="false">20s</button>
+    </div>
+  </div>
+  <p class="count" id="count"></p>
+  <main class="grid" id="grid"></main>
+
+  <footer>
+    <span>© 2026 Infiniloop. All footage is licensed through Adobe Stock.</span>
+    <a href="https://stock.adobe.com/contributor/213646064/Infiniloop" target="_blank" rel="noopener noreferrer">stock.adobe.com/contributor/213646064</a>
+  </footer>
+</div>
+
+<script>
+var CLIPS=[
+["Seamless USD Money Bundle Motion Graphics","2217233781",15],
+["US Currency Stack Loop Motion Background","2217233775",15],
+["USA Dollar Money Bundle Animation Seamless Loop Motion Background","2217233594",15],
+["United States Dollar Cash Bundle in Seamless Loop Animation","2217233348",15],
+["Money Bundles Falling Seamless Loop Overlay","2217233117",20],
+["American Banknote Bundles Seamless Loop Animation","2217233045",15],
+["USD Money Motion Graphics Seamless Loop for Trading Content","2222586129",15],
+["United States Currency Animation Seamless Loop for Global Finance","2222585582",12],
+["USD Exchange Rate Animation Seamless Loop for Forex Content","2222585480",12],
+["USD Currency Motion Graphics Seamless Loop for Financial Projects","2222585304",12],
+["United States Dollar Animation Seamless Loop Motion Background","2222585152",12],
+["Dollar Money Motion Graphics Seamless Loop for Advertising","2222584993",15],
+["Money Animation Seamless Loop Background with Alpha Channel","2222584323",12],
+["American Dollar Motion Background Seamless Loop for Online Finance","2222584153",20],
+["American Money Animation Seamless Loop for Finance Presentations","2222583397",12]
+];
+var grid=document.getElementById("grid"),q=document.getElementById("q"),count=document.getElementById("count"),secs=0;
+function url(c){return "https://stock.adobe.com/video/"+c[0].toLowerCase().replace(/ /g,"-")+"/"+c[1]}
+function poster(c,i){
+  var h=150+(i*17)%70,b="";
+  for(var k=0;k<4;k++){
+    var x=6+((i*7+k*23)%46),y=10+k*19,r=(k%2?-1:1)*(4+k*3);
+    b+='<i class="bill" style="--x:'+x+'%;--y:'+y+'%;--r:'+r+'deg;--d:-'+(k*0.9+(i%3)*0.4).toFixed(1)+'s"></i>';
+  }
+  var fall=/falling/i.test(c[0])?" fall":"";
+  var alpha=/alpha/i.test(c[0])?'<span class="badge">Alpha channel</span>':"";
+  return '<div class="poster'+fall+'" style="--h:'+h+'">'+b+'<div class="badges"><span class="badge">0:'+(c[2]<10?"0":"")+c[2]+'</span><span class="badge">HD</span>'+alpha+'</div></div>';
+}
+function render(){
+  var t=q.value.trim().toLowerCase(),out="",n=0;
+  CLIPS.forEach(function(c,i){
+    if((secs&&c[2]!==secs)||(t&&c[0].toLowerCase().indexOf(t)<0))return;
+    n++;
+    out+='<a class="card" href="'+url(c)+'" target="_blank" rel="noopener noreferrer">'+poster(c,i)+'<div class="info"><h3>'+c[0]+'</h3><span>View on Adobe Stock ↗</span></div></a>';
+  });
+  grid.innerHTML=out||'<p class="empty">No clips match that search. Try a different word.</p>';
+  count.textContent=n+(n===1?" clip":" clips");
+}
+q.addEventListener("input",render);
+document.querySelectorAll(".chip").forEach(function(b){
+  b.addEventListener("click",function(){
+    secs=+b.dataset.s;
+    document.querySelectorAll(".chip").forEach(function(o){o.setAttribute("aria-pressed",o===b)});
+    render();
+  });
+});
+document.getElementById("nClips").textContent=CLIPS.length;
+render();
+</script>
+</body>
+</html>
